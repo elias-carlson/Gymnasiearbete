@@ -7,12 +7,11 @@ html lang="en"
         link rel="stylesheet" href="/css/main.css"
         link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900|Raleway:400,700|Bungee:400" rel="stylesheet"
         link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
-        script type="text/javascript" src="/js/script.js"
+        script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"
         title HSGH
     body
     
     header 
-        .sidenav
 
         .menubtn
             <i class="material-icons md-36">menu</i>
@@ -23,9 +22,16 @@ html lang="en"
 
         .register
             a href="/register" Register
+    
+    .sidenav
+    
     main
         == yield
     footer
+        h1 This is a footer
+        p With some text here.
+
+    script type="text/javascript" src="/js/script.js"
 
     
 
