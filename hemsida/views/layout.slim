@@ -7,7 +7,6 @@ html lang="en"
         link rel="stylesheet" href="/css/main.css"
         link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900|Raleway:400,700|Bungee:400" rel="stylesheet"
         link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
-        script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"
         title HSGH
     body
     
@@ -15,13 +14,26 @@ html lang="en"
 
         .menubtn
             <i class="material-icons md-36">menu</i>
-        .logo
-            
-        .login
-            p Login
+        
+        .logo 
 
-        .register
-            a href="/register" Register
+        - if user != nil
+           .profile
+                p = user["username"]
+           .logout
+                form action="/logout" method="POST"
+                    input id="loginbtn" type="submit" value="Logout"
+        - else    
+            .login
+                form action="/login" method="POST"
+                    input class="loginfield" type="text" placeholder="Username or Email" name="username_or_email"
+                    input class="loginfield" type="password" placeholder="Password" name="password"
+                    input id="loginbtn" type="submit" value="Login"
+                
+                p Login
+
+            .register
+                a href="/register" Register
     
     .sidenav
     
@@ -31,6 +43,7 @@ html lang="en"
         h1 This is a footer
         p With some text here.
 
+    script type="text/javascript" src="/js/jquery-3.2.1.min.js"
     script type="text/javascript" src="/js/script.js"
 
     

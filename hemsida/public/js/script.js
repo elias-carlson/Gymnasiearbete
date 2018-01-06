@@ -1,11 +1,15 @@
-$(document).ready(function(){
+$(function(){
     $(".menubtn").click(function(){
-        $(".sidenav").css('width', 'calc(100vw - 60px)');
+        $(".sidenav").animate({width: '300px'}, 500);        
     });
-});
 
-$(document).ready(function(){
     $("main,footer").click(function(){
-        $(".sidenav").css('width', '0');
+        $(".sidenav").animate({width: '0'}, 500);
+    });
+
+    $(".login p").click(function(){
+        $(".login p").css('display', 'none');
+        $(".login form").css('display', 'flex');
+        $(".loginfield").animate({width: '150px'}, 500);
     });
 });
