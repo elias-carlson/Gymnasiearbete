@@ -13,7 +13,7 @@ html lang="en"
     header 
 
         .menubtn
-            <i class="material-icons md-36">menu</i>
+            i.material-icons.md-36 menu
         
         .logo 
 
@@ -22,15 +22,20 @@ html lang="en"
                 p = user["username"]
            .logout
                 form action="/logout" method="POST"
-                    input id="loginbtn" type="submit" value="Logout"
+                    input#submitbtn type="submit" value="Logout"
         - else    
             .login
+                - if error != nil
+                    #loginerror 
+                        i.material-icons.md-36 error_outline 
+                        p = error
                 form action="/login" method="POST"
-                    input class="loginfield" type="text" placeholder="Username or Email" name="username_or_email"
-                    input class="loginfield" type="password" placeholder="Password" name="password"
-                    input id="loginbtn" type="submit" value="Login"
-                
-                p Login
+                    input.loginfield type="text" placeholder="Username or Email" name="username_or_email"
+                    input.loginfield type="password" placeholder="Password" name="password"
+
+                    input#submitbtn type="submit" value="Login"
+                    
+                p#loginbtn Login
 
             .register
                 a href="/register" Register
@@ -46,5 +51,8 @@ html lang="en"
     script type="text/javascript" src="/js/jquery-3.2.1.min.js"
     script type="text/javascript" src="/js/script.js"
 
+    - if error != nil
+        javascript:
+            showLoginError();
     
 

@@ -3,14 +3,15 @@ require_relative './model/model'
 class App < Sinatra::Base
 
 	enable :sessions
+	register Sinatra::Flash
 	include HSGH_DB
 
 	get ('/') do
-		slim(:index, locals:{user: session[:user]})
+		slim(:index, locals:{user: session[:user], error: flash[:error]})
 	end
 
 	get '/register' do
-		slim(:register, :layout => false, locals:{error: session[:error]})
+		slim(:register, :layout => false, locals:{error: flash[:error]})
 	end
 
 	post('/register') do
@@ -27,7 +28,7 @@ class App < Sinatra::Base
 		if user == nil
 			if username != "" && email != "" && password != "" && password_confirmation != ""
 				if username =~ regex
-					session[:error] = "Username cannot contain any special characters."
+					flash[:error] = "Username cannot contain any special characters."
 					redirect('/register')
 				else 
 					if email.include?('@')
@@ -35,20 +36,20 @@ class App < Sinatra::Base
 							create_user(username, password, email)
 							redirect('/')
 						else
-							session[:error] = "Passwords not matching."
+							flash[:error] = "Passwords not matching."
 							redirect('/register')
 						end
 					else
-						session[:error] = "Enter valid email address."
+						flash[:error] = "Enter valid email address."
 						redirect('/register')
 					end
 				end
 			else
-				session[:error] = "Please fill in all fields."
+				flash[:error] = "Please fill in all fields."
 				redirect('/register')
 			end
 		else
-			session[:error] = "The username is already taken."
+			flash[:error] = "The username is already taken."
 			redirect('/register')
 		end
 	end
@@ -59,29 +60,27 @@ class App < Sinatra::Base
 
 		user = get_user_with_username(username_or_email)
 
+		if username_or_email == "" || password == ""
+			flash[:error] = "Please fill in all fields."
+			redirect('/')
+		end
+
 		if user == nil
 			user = get_user_with_email(username_or_email)
 		end
 
-		# p user_email["password_digest"]
-
 		if user == nil
-			session[:error] = "Incorrect username or email."
+			flash[:error] = "Incorrect user credentials."
 			redirect('/')
 		end
 
-		# user_id = user["id"]
-		# username = user["username"]
-		# email = user["username"]
-		# phone_no = user["username"]
-		# company_name = user["company_name"]
 		password_digest = user["password_digest"]
 
 		if BCrypt::Password.new(password_digest) == password
 			session[:user] = user
 			redirect('/')
 		else
-			session[:error] = "Incorrect password."
+			flash[:error] = "Incorrect user credentials."
 			redirect('/')
 		end
 	end
