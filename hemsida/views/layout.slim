@@ -30,7 +30,7 @@ html lang="en"
                         i.material-icons.md-36 error_outline 
                         p = error
                 form action="/login" method="POST"
-                    input.loginfield type="text" placeholder="Username or Email" name="username_or_email"
+                    input.loginfield type="text" placeholder="Username or Email" name="username_or_email" value="#{username_or_email != nil ? username_or_email : nil}"
                     input.loginfield type="password" placeholder="Password" name="password"
 
                     input#submitbtn type="submit" value="Login"

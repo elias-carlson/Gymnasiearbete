@@ -19,3 +19,7 @@ function showLoginError(){
     $(".login form").css('display', 'flex');
     $(".loginfield").css('width', '150px');
 };
+
+function registerError(element) {
+    $(element).css('border', 'red 1px solid');
+}

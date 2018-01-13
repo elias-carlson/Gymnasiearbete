@@ -7,11 +7,11 @@ class App < Sinatra::Base
 	include HSGH_DB
 
 	get ('/') do
-		slim(:index, locals:{user: session[:user], error: flash[:error]})
+		slim(:index, locals:{user: session[:user], error: flash[:error], username_or_email: flash[:username_or_email]})
 	end
 
 	get '/register' do
-		slim(:register, :layout => false, locals:{error: flash[:error]})
+		slim(:register, :layout => false, locals:{error: flash[:error], element: flash[:element], username: flash[:username], email: flash[:email]})
 	end
 
 	post('/register') do
@@ -29,6 +29,9 @@ class App < Sinatra::Base
 			if username != "" && email != "" && password != "" && password_confirmation != ""
 				if username =~ regex
 					flash[:error] = "Username cannot contain any special characters."
+					flash[:element] = "#username"
+					flash[:username] = username
+					flash[:email] = email
 					redirect('/register')
 				else 
 					if email.include?('@')
@@ -37,19 +40,30 @@ class App < Sinatra::Base
 							redirect('/')
 						else
 							flash[:error] = "Passwords not matching."
+							flash[:element] = "#password, #password_confirmation"
+							flash[:username] = username
+							flash[:email] = email
 							redirect('/register')
 						end
 					else
 						flash[:error] = "Enter valid email address."
+						flash[:element] = "#email"
+						flash[:username] = username
+						flash[:email] = email
 						redirect('/register')
 					end
 				end
 			else
 				flash[:error] = "Please fill in all fields."
+				flash[:username] = username
+				flash[:email] = email
 				redirect('/register')
 			end
 		else
 			flash[:error] = "The username is already taken."
+			flash[:element] = "#username"
+			flash[:username] = username
+			flash[:email] = email
 			redirect('/register')
 		end
 	end
@@ -62,6 +76,7 @@ class App < Sinatra::Base
 
 		if username_or_email == "" || password == ""
 			flash[:error] = "Please fill in all fields."
+			flash[:username_or_email] = username_or_email
 			redirect('/')
 		end
 
@@ -71,6 +86,7 @@ class App < Sinatra::Base
 
 		if user == nil
 			flash[:error] = "Incorrect user credentials."
+			flash[:username_or_email] = username_or_email
 			redirect('/')
 		end
 
@@ -81,6 +97,7 @@ class App < Sinatra::Base
 			redirect('/')
 		else
 			flash[:error] = "Incorrect user credentials."
+			flash[:username_or_email] = username_or_email
 			redirect('/')
 		end
 	end

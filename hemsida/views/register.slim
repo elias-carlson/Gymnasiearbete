@@ -17,12 +17,12 @@ html lang="en"
         h1 Register
         
         form action="/register" method="POST"
-                input type="text" placeholder="Username" name="username"
-                input type="text" placeholder="Email" name="email"
-                input type="password" placeholder="Password" name="password"
-                input type="password" placeholder="Confirm password" name="password_confirmation"
+                input id="username" type="text" placeholder="Username" name="username" value="#{username != nil ? username : nil }"
+                input id="email" type="text" placeholder="Email" name="email" value="#{email != nil ? email : nil }"
+                input id="password" type="password" placeholder="Password" name="password"
+                input id="password_confirmation" type="password" placeholder="Confirm password" name="password_confirmation"
 
-                - if error != nil
+                - if error
                     p 
                         = error
 
@@ -30,3 +30,12 @@ html lang="en"
 
                 p Already have an account? 
                     <a href="/"> Login here. </a>
+
+    script type="text/javascript" src="/js/jquery-3.2.1.min.js"
+    script type="text/javascript" src="/js/script.js"
+
+    - if element != nil
+        javascript:
+            element = "#{element}";
+            registerError(element);
+    
