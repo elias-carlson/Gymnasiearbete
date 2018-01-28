@@ -21,7 +21,7 @@ a {
 }
 
 header {
-    height: 60px;
+    height: 60px;    
     width: 100%;
     background: #616161;
     color: #212121;
@@ -131,7 +131,7 @@ header {
 } */
 
 main {
-    height: calc(100vh - 80px);
+    height: 100vh;
     width: 100%;
     background: #9E9E9E;
     display: flex;
@@ -180,6 +180,42 @@ main {
     box-shadow: 2px 2px 10px rgba(0,0,0,0.75);
 }
 
+#toTopBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    background-color: #FF9800;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+#app {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    width: calc(100vw - 25px);
+    height: 100%;
+    color: #212121;
+}
+
+.control_panel {
+    border: solid black 1px;
+}
+
+.website_preview {
+    border: solid black 1px;
+}
+
+iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
 
 footer {
     display: flex;

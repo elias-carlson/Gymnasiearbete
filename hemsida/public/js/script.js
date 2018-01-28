@@ -1,6 +1,6 @@
 $(function(){
     $(".menubtn").click(function(){
-        $(".sidenav").animate({width: '300px'}, 500);        
+        $(".sidenav").animate({width: '300px'}, 500);
     });
 
     $("main,footer").click(function(){
@@ -23,3 +23,16 @@ function showLoginError(){
 function registerError(element) {
     $(element).css('border', 'red 1px solid');
 }
+
+$(window).scroll(function() {
+    if ($(this).scrollTop() < 100 || $(this).scrollTop() > 100 ) {
+        $("#toTopBtn").fadeIn();
+    } else {
+        $("#toTopBtn").fadeOut();   
+    }
+});
+
+// When the user clicks on the button, scroll to the top of the document
+$("#toTopBtn").click(function() {
+    $(window).scrollTop(100);
+});

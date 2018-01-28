@@ -24,4 +24,12 @@ module HSGH_DB
         password_digest = BCrypt::Password.create(password)
         db.execute("INSERT INTO users(username, password_digest, email) VALUES (?,?,?)", [username, password_digest, email])
     end
+
+    def get_html template_name
+        db = db_connect()
+        db.results_as_hash = false
+        # result = db.execute("SELECT html FROM sites WHERE template_id IN(SELECT id FROM templates WHERE name=?)", template_name)
+        result = db.execute("SELECT html FROM templates WHERE id=1")[0][0]
+    end
+
 end

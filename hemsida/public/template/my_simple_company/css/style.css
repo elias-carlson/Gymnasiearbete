@@ -196,7 +196,6 @@ aside li a,
 aside li a:hover {
     padding-left: 40px;
     display: block;
-    background: transparent url(link.png) no-repeat left center;
 }
 
 #content {
@@ -211,7 +210,6 @@ aside li a:hover {
 
 #content section ul li {
     list-style-type: none;
-    background: url(bullet.png) no-repeat;
     margin: 0 0 6px 0;
     padding: 0 0 4px 25px;
     line-height: 1.5em;

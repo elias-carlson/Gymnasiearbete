@@ -14,6 +14,15 @@ class App < Sinatra::Base
 		slim(:register, :layout => false, locals:{error: flash[:error], element: flash[:element], username: flash[:username], email: flash[:email]})
 	end
 
+	# get '/preview' do
+	# 	send_file 'public/template/my_simple_company/index.html'
+	# end
+
+	get '/app' do
+		website = get_html("my_simple_company")
+		slim(:app, locals:{user: session[:user], error: flash[:error], username_or_email: flash[:username_or_email], website: website})
+	end
+
 	post('/register') do
 		username = params[:username]
 		email = params[:email]

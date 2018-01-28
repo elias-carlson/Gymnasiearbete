@@ -1,0 +1,20 @@
+#toTopBtn
+    i.material-icons fullscreen
+
+wrapper id="app"
+    .control_panel
+
+    .website_preview
+        iframe id="preview_iframe" src=""
+
+- if website != nil
+    - p website
+
+javascript: 
+    $(document).ready(()=> {
+        let preview = `#{website}`.replace(/\&lt;/g, '<');
+        preview = preview.replace(/\&gt;/g, '>');
+        preview = preview.replace(/\&/g, '"');
+        preview = preview.replace(/\quot;/g, '');
+        $('iframe').contents().find('body').html(preview);
+    });
