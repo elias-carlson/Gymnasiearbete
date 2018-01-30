@@ -34,5 +34,5 @@ $(window).scroll(function() {
 
 // When the user clicks on the button, scroll to the top of the document
 $("#toTopBtn").click(function() {
-    $(window).scrollTop(100);
+    $("html").animate({scrollTop: '100px'});
 });

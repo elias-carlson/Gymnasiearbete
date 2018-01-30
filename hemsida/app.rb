@@ -14,10 +14,6 @@ class App < Sinatra::Base
 		slim(:register, :layout => false, locals:{error: flash[:error], element: flash[:element], username: flash[:username], email: flash[:email]})
 	end
 
-	# get '/preview' do
-	# 	send_file 'public/template/my_simple_company/index.html'
-	# end
-
 	get '/app' do
 		website = get_html("my_simple_company")
 		slim(:app, locals:{user: session[:user], error: flash[:error], username_or_email: flash[:username_or_email], website: website})
@@ -86,7 +82,7 @@ class App < Sinatra::Base
 		if username_or_email == "" || password == ""
 			flash[:error] = "Please fill in all fields."
 			flash[:username_or_email] = username_or_email
-			redirect('/')
+			redirect(back)
 		end
 
 		if user == nil
@@ -96,23 +92,23 @@ class App < Sinatra::Base
 		if user == nil
 			flash[:error] = "Incorrect user credentials."
 			flash[:username_or_email] = username_or_email
-			redirect('/')
+			redirect(back)
 		end
 
 		password_digest = user["password_digest"]
 
 		if BCrypt::Password.new(password_digest) == password
 			session[:user] = user
-			redirect('/')
+			redirect(back)
 		else
 			flash[:error] = "Incorrect user credentials."
 			flash[:username_or_email] = username_or_email
-			redirect('/')
+			redirect(back)
 		end
 	end
 
 	post('/logout') do
 		session[:user] = nil
-		redirect('/')
+		redirect(back)
 	end
 end
