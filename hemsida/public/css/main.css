@@ -203,12 +203,31 @@ main {
     color: #212121;
 }
 
-.control_panel {
-    border: solid black 1px;
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #9E9E9E;
 }
 
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    background: #616161;
+    border-radius: 2px;
+}
+
+.control_panel .options:nth-Child(n) .style, .control_panel .options:nth-Child(n) .content {
+    display: flex;
+    flex-direction: row;
+}
+
+.dropMenu {
+    display: none;
+    background-color: white;
+    width: 40%;
+}
+
+
+
 .website_preview {
-    border: solid black 1px;
 }
 
 iframe {
