@@ -214,16 +214,16 @@ main {
     border-radius: 2px;
 }
 
-.control_panel .options:nth-Child(n) .style, .control_panel .options:nth-Child(n) .content {
+.control_panel .dm_options:nth-Child(n) .style, .control_panel .dm_options:nth-Child(n) .content {
     display: flex;
     flex-direction: row;
 }
 
-.options p{
+.dm_options p{
     display: inline;
 }
 
-.dropBtn {
+.dmBtn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -234,14 +234,17 @@ main {
     color: white;
 }
 
-.dropMenu {
+[class*="Menu"], [class*="Opt"] {
     display: none;
+}
+
+.dmMenu {
     width: 80%;
     margin: 0 auto;
     background: white;
 }
 
-.dropMenu p {
+.dmMenu p {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -253,12 +256,12 @@ main {
     border-radius: 2px;
 }
 
-.dropMenu .selected {
+.dmMenu .selected {
     background: #BDBDBD;
     color: white;
 }
 
-.dropMenu p:hover, .dropBtn:hover {
+.dmMenu p:hover, .dropBtn:hover {
     cursor: pointer;
 }
 

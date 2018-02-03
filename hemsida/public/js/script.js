@@ -30,8 +30,8 @@ $(function () {
         // });
 
         var i = 1;
-        $(".dropMenu").children().each(function () {
-            $(".options").append(`
+        $(".dmMenu").children().each(function () {
+            $(".dm_options").append(`
                     <div class="dmOpt`+ i + `">
                         <div class="style">
                             <div class="bg">
@@ -59,33 +59,56 @@ $(function () {
             }
         });
 
-        $("#toTopBtn").click(function () {
+        $("#toTopBtn").click(function (e) {
             $("html").animate({ scrollTop: '100px' });
         });
 
-        $(".dropBtn").click(function () {
-            $(".dropMenu").slideToggle();
+        $(".control_panel").click(function(e) {
+            if ($(e.target).attr("class").includes("Btn")) {
+                var targetIdPrefix = $(e.target).attr("class").substring(0,2);
+                $("."+targetIdPrefix+"Menu").slideToggle();
+            } else if($(e.target).attr("class").includes("Menu")) {
+                var opt_id = $(this).attr("id");
+                var opt_id_prefix = opt_id.substring(0,2);
+
+                if (!$(this).hasClass("selected")) {
+                    $("."+opt_id_prefix+"Menu").find(".selected").toggleClass("selected");
+                    $(this).toggleClass("selected");
+                    $("."+opt_id_prefix+"_options").children().hide();
+                    $("."+opt_id_prefix+"_options").find("." + opt_id).show();
+                    $("."+opt_id_prefix+"Btn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
+                    $("."+opt_id_prefix+"Menu").slideToggle();
+                } else {
+                    $("."+opt_id_prefix+"Btn").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
+                    $(this).toggleClass("selected");
+                    $("."+opt_id_prefix+"_options").children().hide();
+                    $("."+opt_id_prefix+"Menu").slideToggle();
+                };
+
+            } else if($(e.target).attr("class").includes("Opt")) {
+
+            };
         });
 
-        $(".options").children().hide();
+        $(".dm_options").children().hide();
         // must be deleted in the final form
-        $(".options").find(".test").show();
-        $(".dropMenu").children().click(function () {
+        $(".dm_options").find(".test").show();
+        $(".dmMenu").children().click(function () {
             var opt_id = $(this).attr("id");
             var opt_id_prefix = opt_id.substring(0,2);
             var opt_id_suffix = opt_id.substring(2,6);
             if (!$(this).hasClass("selected")) {
-                $(".dropMenu").find(".selected").toggleClass("selected");
+                $(".dmMenu").find(".selected").toggleClass("selected");
                 $(this).toggleClass("selected");
-                $(".options").children().hide();
-                $(".options").find("." + opt_id).show();
-                $(".dropBtn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
-                $(".dropMenu").slideToggle();
+                $(".dm_options").children().hide();
+                $(".dm_options").find("." + opt_id).show();
+                $(".dmBtn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
+                $(".dmMenu").slideToggle();
             } else {
-                $(".dropBtn").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
+                $(".dmBtn").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
                 $(this).toggleClass("selected");
-                $(".options").children().hide();
-                $(".dropMenu").slideToggle();
+                $(".dm_options").children().hide();
+                $(".dmMenu").slideToggle();
             };
 
         });

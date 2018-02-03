@@ -5,10 +5,10 @@
 
 wrapper id="app"
     .control_panel
-        .dropBtn 
-            |   Select area
+        .dmBtn 
+            | Select area
             i.material-icons arrow_drop_down
-        .dropMenu
+        .dmMenu
             p#dmOpt1 Header
             p#dmOpt2 Navigation Menu
             p#dmOpt3 Home
@@ -18,7 +18,7 @@ wrapper id="app"
             p#dmOpt7 Contact
             p#dmOpt8 Footer
 
-        .options    
+        .dm_options   
             .test
                 hr
                 .style
@@ -29,13 +29,13 @@ wrapper id="app"
                         .bgMenu
                             p#bgOpt1 Color
                             p#bgOpt2 Image
-
-                        .bgOpt1
-                            input.color_picker type="color"
-                            button Apply
-                        .bgOpt2
-                            input type="text"
-                            button Apply
+                        .bg_options
+                            .bgOpt1
+                                input.color_picker type="color"
+                                button Apply
+                            .bgOpt2
+                                input type="text"
+                                button Apply
 
                 hr
                 .content
