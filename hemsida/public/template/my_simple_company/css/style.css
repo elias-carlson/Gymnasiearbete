@@ -99,7 +99,7 @@ footer {
 }
 
 header {
-    background-color: black;
+    background: black;
     height: 240px;
 }
 
@@ -164,7 +164,7 @@ ul#menu li:hover,
 ul#menu li.selected,
 ul#menu li.selected:hover {
     color: white;
-    background-color: dimgray;
+    background: dimgray;
 }
 
 main {

@@ -5,33 +5,39 @@
 
 wrapper id="app"
     .control_panel
-        .dropBtn Dropdown
+        .dropBtn 
+            |   Select area
+            i.material-icons arrow_drop_down
         .dropMenu
-            p#opt1 Header
-            p#opt2 Navigation Menu
-            p#opt3 Home
-            p#opt4 Page1
-            p#opt5 Page2
-            p#opt6 Page3
-            p#opt7 Contact
-            p#opt8 Footer
-            
+            p#dmOpt1 Header
+            p#dmOpt2 Navigation Menu
+            p#dmOpt3 Home
+            p#dmOpt4 Page1
+            p#dmOpt5 Page2
+            p#dmOpt6 Page3
+            p#dmOpt7 Contact
+            p#dmOpt8 Footer
+
         .options    
-            .template
+            .test
+                hr
                 .style
                     .bg
-                        p Background 
-                        i.material-icons arrow_drop_down
-                            
-                        .bg_opt
-                            p Color:
-                            .color
-                                input.color_picker type="color"
-                                button.apply Apply
-                            .image
-                                p Image:
-                                input type="text"
+                        .bgBtn
+                            | Background 
+                            i.material-icons arrow_drop_down
+                        .bgMenu
+                            p#bgOpt1 Color
+                            p#bgOpt2 Image
 
+                        .bgOpt1
+                            input.color_picker type="color"
+                            button Apply
+                        .bgOpt2
+                            input type="text"
+                            button Apply
+
+                hr
                 .content
 
     .website_preview
