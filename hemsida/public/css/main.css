@@ -225,7 +225,13 @@ main {
     width: 40%;
 }
 
+.not_selected {
+    display: none;
+}
 
+.selected {
+    display: flex!important;
+}
 
 .website_preview {
 }

@@ -25,17 +25,21 @@ $(function(){
     
     if(top.location.pathname == "/app") {
 
+        // $(window).on('beforeunload', function(){
+        //     return 'Are you sure you want to leave?';
+        // });
+
         $(function() {
             var i = 1;
             $(".dropMenu").children().each(function() {
                 $(".options").append(`
-                    <div id="opt_`+i+`">
+                    <div class="opt`+i+` not_selected">
                         <div class="style">
                             <div class="bg">
                                 <p>Background </p>
                                 <i class="material-icons">arrow_drop_down</i>
                                 <p>Color:</p>
-                                <input class="jscolor" value="ab2567">
+                                <input type="color">
                                 <p>Image:</p>
                                 <input type="text">
                             </div>
@@ -68,7 +72,7 @@ $(function(){
     
         $(".dropMenu").children().click(function() {
             var opt_id = $(this).attr("id");
-            $("."+opt_id).toggleClass(selected);
+            $("."+opt_id).toggleClass("selected");
         });
     } 
 });
