@@ -55,6 +55,7 @@ header {
     background: url("/img/logo.svg") no-repeat;
     filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
     grid-column: 2 / 3;
+    margin-left: 20px;
 }
 
 .login, .register, .profile, .logout {
@@ -142,11 +143,10 @@ main {
 
 #index {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 2fr;
     grid-gap: 50px;
     margin: 50px;
-    width: 70%;
-    height: 60%;
+    width: 80%;
     padding: 50px;
     border-radius: 2px;
     color: #212121;
@@ -156,7 +156,7 @@ main {
     flex-direction: column;
 }
 
-.right, .left, .left .welcome, .left .start {
+.left, .left .welcome, .left .start {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,19 +164,21 @@ main {
 }
 
 .right {
-    background: url("https://picsum.photos/g/500/400") no-repeat;
+    background: url("/img/template.PNG") center no-repeat;
     background-size: cover;
 }
 
-.left .welcome {
-
+.left .welcome p {
+    margin-top: 5px;
 }
 
 .left .start {
     background: #FF9800;
     padding: 10px;
+    margin-top: 10px;
     border-radius: 2px;
-    width: 100%;
+    width: 80%;
+    height: 50px;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.75);
 }
 
