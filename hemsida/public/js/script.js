@@ -31,26 +31,32 @@ $(function () {
 
         var i = 1;
         $(".dmMenu").children().each(function () {
-            $(".dm_options").append(`
-                    <div class="dmOpt`+ i + `">
-                        <div class="style">
-                            <div class="bg">
-                                <p>Background </p>
-                                <i class="material-icons">arrow_drop_down</i>
-                                <p>Color:</p>
-                                <input type="color">
-                                <p>Image:</p>
-                                <input type="text">
+            $(".dmOptions").append(`
+                <div class="dmOpt`+ i + `">
+                    <hr>
+                    <div class="style">
+                        <div class="opt1">
+                            <p>Background</p>
+                            <div class="optSettings">
+                                <div class="stg1">
+                                    <p>Color:</p>
+                                    <input class="color_picker" type="color">
                                 </div>
+                                <div class="stg2">
+                                    <p>Image:</p>
+                                    <input type="text">
+                                </div>
+                                <button>Apply</button>
+                            </div>
                         </div>
-                        <div class="content">
-                        
-                        </div>
-                    </div>`
-                );
-                i++;
+                    </div>
+                    <hr>
+                    <div class="content"></div>
+                </div>`
+            );
+            i++;
         });
-        
+
         $(window).scroll(function () {
             if ($(this).scrollTop() < 100 || $(this).scrollTop() > 100) {
                 $("#toTopBtn").fadeIn();
@@ -62,9 +68,84 @@ $(function () {
         $("#toTopBtn").click(function (e) {
             $("html").animate({ scrollTop: '100px' });
         });
-        
-        // $(".dm_options").children().hide();
-        // $(".dm_options").find(".test").show();
+
+        //!
+        $(".dmOptions").children().hide();
+        $(".dmMenu").children().hide();
+        $(".bgOptions").children().hide();
+        $(".bgMenu").children().hide();
+        $(".dmOptions").find(".test").show();
+
+        $(".dmBtn").click(function () {
+            $(".dmMenu").children().slideToggle();
+        });
+        var opt_id, opt_id_suffix, activeArea, activeOpt, activeStg
+        $(".dmMenu").children().click(function () {
+            opt_id = $(this).attr("id");
+            opt_id_suffix = opt_id.substring(5, 6);
+            if (!$(this).hasClass("selected")) {
+                activeArea = $(this).html().toLowerCase();
+                activeArea = activeArea.replace(/ /g, '_');
+                $(".dmMenu").find(".selected").toggleClass("selected");
+                $(this).toggleClass("selected");
+                $(".dmOptions").children().hide();
+                $(".dmOptions").find("." + opt_id).show();
+                $(".dmBtn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
+                $(".dmMenu").children().slideToggle();
+            } else {
+                activeArea = "";
+                $(".dmBtn").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
+                $(this).toggleClass("selected");
+                $(".dmOptions").children().hide();
+                $(".dmMenu").children().slideToggle();
+            };
+        });
+
+        $(".optSettings").find("button").click(function () {
+            activeOpt = $(this).parent().parent().find("p").html().toLowerCase();
+            $('iframe').contents().find(activeArea).css(activeOpt, $(".dmOpt" + opt_id_suffix).find(".stg1").find("input").val());
+            if ($(".dmOpt" + opt_id_suffix).find(".stg2").find("input").val() != "") {
+                $('iframe').contents().find(activeArea).css(activeOpt, `url("` + $(".dmOpt" + opt_id_suffix).find(".stg2").find("input").val() + `") no-repeat center`);
+                $('iframe').contents().find('header').css("background-size", "cover");
+            };
+        });
+
+        // $(".image").find("button").click(function () {
+        //     $('iframe').contents().find('header').css("background", `url("` + $(".image").find("input").val() + `") no-repeat center`);
+            // $('iframe').contents().find('header').css("background-size", "cover");
+        // });
+
+        // //February Try
+        // $(".dmOptions>>>>").click(function () {
+        //     // if ($(e.target).attr("class") != undefined && $(e.target).attr("class") != "material-icons") {
+        //     //     alert($(e.target).attr("class") + " | " + $(e.target).attr("id"));
+        //     // } else {
+        //     //     e.target = $(e.target).parent();
+        //     //     alert($(e.target).attr("class") + " | " + $(e.target).attr("id"));
+        //     // };
+        //     if ($(this).attr("class").includes("Btn")) {
+        //         $(".bgMenu").children().slideToggle();
+        //     };
+        //     $(".bgMenu").children().click(function () {
+        //         var bg_id = $(this).attr("id");
+        //         var bg_id_suffix = bg_id.substring(2, 6);
+        //         if (!$(this).hasClass("selected")) {
+        //             $(".bgMenu").find(".selected").toggleClass("selected");
+        //             $(this).toggleClass("selected");
+        //             $(".bgOptions").children().hide();
+        //             $(".bgOptions").find("." + bg_id).show();
+        //             $(".bgBtn").html(`Background: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
+        //             $(".bgMenu").children().slideToggle();
+        //         } else {
+        //             $(".bgBtn").html($(this>p).attr(id));
+        //             $(this).toggleClass("selected");
+        //             $(".bgOptions").children().hide();
+        //             $(".bgMenu").children().slideToggle();
+        //         };
+        //     });
+        // });
+
+        // //January Try
         // $(".control_panel").click(function(e) {
         //     alert($(e.target).attr("class") + " | " + $(e.target).attr("id"));
 
@@ -100,35 +181,6 @@ $(function () {
 
         //     // };
         // });
-
-        // must be deleted in the final form
-        // $(".dmMenu").children().click(function () {
-        //     var opt_id = $(this).attr("id");
-        //     var opt_id_prefix = opt_id.substring(0,2);
-        //     var opt_id_suffix = opt_id.substring(2,6);
-        //     if (!$(this).hasClass("selected")) {
-        //         $(".dmMenu").find(".selected").toggleClass("selected");
-        //         $(this).toggleClass("selected");
-        //         $(".dm_options").children().hide();
-        //         $(".dm_options").find("." + opt_id).show();
-        //         $(".dmBtn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
-        //         $(".dmMenu").slideToggle();
-        //     } else {
-        //         $(".dmBtn").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
-        //         $(this).toggleClass("selected");
-        //         $(".dm_options").children().hide();
-        //         $(".dmMenu").slideToggle();
-        //     };
-        // });
-        
-        $(".color").find("button").click(function() {
-            $('iframe').contents().find('header').css("background", $(".color").find("input").val());
-        });
-        
-        $(".image").find("button").click(function() {
-            $('iframe').contents().find('header').css("background", `url("` + $(".image").find("input").val() + `") no-repeat center`);
-            $('iframe').contents().find('header').css("background-size", "cover");
-        });
 
     };
 });

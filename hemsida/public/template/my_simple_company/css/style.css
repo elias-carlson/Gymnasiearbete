@@ -91,7 +91,7 @@ ol li {
 }
 
 #logo,
-#menubar,
+#navigation_menu,
 main,
 footer {
     margin-left: auto;
@@ -130,7 +130,7 @@ header {
     color: darkgray;
 }
 
-#menubar {
+#navigation_menu {
     width: 900px;
     height: 72px;
     padding: 0;

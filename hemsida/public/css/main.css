@@ -216,12 +216,12 @@ main {
     border-radius: 2px;
 }
 
-.control_panel .dm_options:nth-Child(n) .style, .control_panel .dm_options:nth-Child(n) .content {
+.control_panel .dmOptions:nth-Child(n) .style, .control_panel .dmOptions:nth-Child(n) .content {
     display: flex;
     flex-direction: row;
 }
 
-.dm_options p{
+.dmOptions p{
     display: inline;
 }
 
@@ -236,9 +236,9 @@ main {
     color: white;
 }
 
-[class*="Menu"], [class*="Opt"] {
+/* [class*="Menu"], [class*="Opt"] {
     display: none;
-}
+} */
 
 .dmMenu {
     width: 80%;
@@ -263,7 +263,7 @@ main {
     color: white;
 }
 
-.dmMenu p:hover, .dropBtn:hover {
+.dmMenu p:hover, .dmBtn:hover, .bgBtn:hover, .bgMenu {
     cursor: pointer;
 }
 
