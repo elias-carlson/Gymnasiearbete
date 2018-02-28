@@ -1,10 +1,12 @@
 $(function () {
     $(".menubtn").click(function () {
         $(".sidenav").animate({ width: '300px' }, 500);
+        $(".sidenav").css('display', 'flex');
     });
 
     $("main,footer").click(function () {
         $(".sidenav").animate({ width: '0' }, 500);
+        $(".sidenav").css('display', 'none');        
     });
 
     $(".login p").click(function () {
