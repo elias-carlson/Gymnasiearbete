@@ -87,9 +87,6 @@ class App < Sinatra::Base
 
 		if user == nil
 			user = get_user_with_email(username_or_email)
-		end
-
-		if user == nil
 			flash[:error] = "Incorrect user credentials."
 			flash[:username_or_email] = username_or_email
 			redirect(back)

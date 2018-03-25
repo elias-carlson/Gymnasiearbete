@@ -105,8 +105,8 @@ $(function () {
 
         $(".optSettings").find("button").click(function () {
             activeOpt = $(this).parent().parent().find("p").html().toLowerCase();
-            $('iframe').contents().find(activeArea).css(activeOpt, $(".dmOpt" + opt_id_suffix).find(".stg1").find("input").val());
-            if ($(".dmOpt" + opt_id_suffix).find(".stg2").find("input").val() != "") {
+            $('iframe').contents().find("." + activeArea).css(activeOpt, $(".dmOpt" + opt_id_suffix).find(".stg1").find("input").val());
+            if ($(".dmOpt" + opt_id_suffix).find(".stg2").find("input").val().includes(".jpg", ".gif", ".png") == true) {
                 $('iframe').contents().find(activeArea).css(activeOpt, `url("` + $(".dmOpt" + opt_id_suffix).find(".stg2").find("input").val() + `") no-repeat center`);
                 $('iframe').contents().find('header').css("background-size", "cover");
             };
