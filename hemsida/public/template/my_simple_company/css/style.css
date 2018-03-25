@@ -91,7 +91,7 @@ ol li {
 }
 
 #logo,
-.navigation_menu,
+#menu,
 main,
 .footer {
     margin-left: auto;
@@ -130,21 +130,20 @@ main,
     color: darkgray;
 }
 
-.navigation_menu {
+#menu {
     width: 900px;
     height: 72px;
     padding: 0;
-    background: gray;
 }
 
-ul#menu,
-ul#menu li {
+ul.navigation_menu,
+ul.navigation_menu li {
     float: left;
     margin: 0;
     padding: 0;
 }
 
-ul#menu li {
+ul.navigation_menu li {
     list-style: none;
     letter-spacing: 0.1em;
     font: normal 100% arial, sans-serif;
@@ -160,9 +159,9 @@ ul#menu li {
     cursor: pointer;
 }
 
-ul#menu li:hover,
-ul#menu li.selected,
-ul#menu li.selected:hover {
+ul.navigation_menu li:hover,
+ul.navigation_menu li.selected,
+ul.navigation_menu li.selected:hover {
     color: white;
     background: dimgray;
 }
