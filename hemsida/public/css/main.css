@@ -222,9 +222,28 @@ main {
     border-radius: 2px;
 }
 
-.control_panel .dmOptions:nth-Child(n) .style, .control_panel .dmOptions:nth-Child(n) .content {
+.control_panel {
+    max-width: 25vw;
+}
+
+.control_panel .dmOptions div  {
     display: flex;
     flex-direction: row;
+}
+
+.control_panel .dmOptions div div  {
+    display: flex;
+    flex-direction: column;
+}
+
+.control_panel .dmOptions:nth-Child(n) .style, .control_panel .dmOptions:nth-Child(n) .content {
+    display: flex;
+    flex-direction: column;
+}
+
+.control_panel .dmOptions:nth-Child(n) .content {
+    display: none;
+    flex-direction: column;
 }
 
 .dmOptions p{

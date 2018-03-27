@@ -41,7 +41,6 @@ $(function () {
         $(".dmMenu").children().each(function () {
             $(".dmOptions").append(`
                 <div class="dmOpt`+ i + `"
-                    <hr>
                     <div class="style">
                         <h1>Style</h1>
                         <div class="opt1">
@@ -58,7 +57,6 @@ $(function () {
                                 <button>Apply</button>
                             </div>
                         </div>
-                        <hr>
                         <div class="opt2">
                             <p>Text</p>
                             <div class="optSettings">
@@ -70,11 +68,9 @@ $(function () {
                             </div>
                         </div>
                     </div>
-                    <hr>
                     <div class="content">
                     <h1>Content</h1>
                     </div>
-                    <hr>
                 </div>`
             );
             i++;
@@ -125,6 +121,7 @@ $(function () {
                 `);
                 var y2 = 1;
                 $('iframe').contents().find(dmOptions[j-1]).find("a").each(function () {
+                    console.log(j);
                     $(`.dmOpt` + j + `  .content .opt2 .optSettings`).append(`<div class="stg` + y2 + `">`);
                     $(`.dmOpt` + j + `  .content .opt2 .optSettings .stg` + y2 + ``).append(`
                         <p>To:</p>
@@ -197,78 +194,5 @@ $(function () {
                 $('iframe').contents().find(activeArea).children().children().css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
             };
         });
-
-        // $(".image").find("button").click(function () {
-        //     $('iframe').contents().find('header').css("background", `url("` + $(".image").find("input").val() + `") no-repeat center`);
-            // $('iframe').contents().find('header').css("background-size", "cover");
-        // });
-
-        // //February Try
-        // $(".dmOptions>>>>").click(function () {
-        //     // if ($(e.target).attr("class") != undefined && $(e.target).attr("class") != "material-icons") {
-        //     //     alert($(e.target).attr("class") + " | " + $(e.target).attr("id"));
-        //     // } else {
-        //     //     e.target = $(e.target).parent();
-        //     //     alert($(e.target).attr("class") + " | " + $(e.target).attr("id"));
-        //     // };
-        //     if ($(this).attr("class").includes("Btn")) {
-        //         $(".bgMenu").children().slideToggle();
-        //     };
-        //     $(".bgMenu").children().click(function () {
-        //         var bg_id = $(this).attr("id");
-        //         var bg_id = bg_id.substring(2, 6);
-        //         if (!$(this).hasClass("selected")) {
-        //             $(".bgMenu").find(".selected").toggleClass("selected");
-        //             $(this).toggleClass("selected");
-        //             $(".bgOptions").children().hide();
-        //             $(".bgOptions").find("." + bg_id).show();
-        //             $(".bgBtn").html(`Background: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
-        //             $(".bgMenu").children().slideToggle();
-        //         } else {
-        //             $(".bgBtn").html($(this>p).attr(id));
-        //             $(this).toggleClass("selected");
-        //             $(".bgOptions").children().hide();
-        //             $(".bgMenu").children().slideToggle();
-        //         };
-        //     });
-        // });
-
-        // //January Try
-        // $(".control_panel").click(function(e) {
-        //     alert($(e.target).attr("class") + " | " + $(e.target).attr("id"));
-
-        //     if ($(e.target).attr("class").includes("Btn")) {
-        //         var target_class_prefix = $(e.target).attr("class").substring(0,2);
-        //         $("." + target_class_prefix + "Menu").slideToggle();
-        //     } else if($(e.target).attr("class").includes("Menu")) {
-        //         var target_id = $(e.target).attr("id");
-        //         var target_id_prefix = target_id.substring(0,2);
-        //         if (!$(e.target).hasClass("selected")) {
-        //             $("." + target_id_prefix + "Menu").find(".selected").toggleClass("selected");
-        //             $(e.target).toggleClass("selected");
-        //             $("." + target_id_prefix + "_options").children().hide();
-        //             $("." + target_id_prefix + "_options").find("." + target_id).show();
-        //             if (target_id_prefix == "dm") {
-        //                 $("." + target_id_prefix + "Btn:first-child").html(`Area: ` + $(e.target).html() + `<i class="material-icons"> arrow_drop_down</i>`);
-        //             } else {
-        //                 $("." + target_id_prefix + "Btn:first-child").html($("." + target_id_prefix + "Btn:first-child").html() + `: ` + $(e.target).html() + `<i class="material-icons"> arrow_drop_down</i>`);
-        //             }
-        //             $("." + target_id_prefix + "Menu").slideToggle();
-        //         } else {
-        //             if (target_id_prefix == "dm") {
-        //                 $("." + target_id_prefix + "Btn:first-child").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
-        //             } else {
-        //                 $("." + target_id_prefix + "Btn:first-child").html($("." + target_id_prefix + "Btn:first-child").attr("id") + `: ` + $(e.target).html() + `<i class="material-icons"> arrow_drop_down</i>`);
-        //             }
-        //             $(e.target).toggleClass("selected");
-        //             $("." + target_id_prefix + "_options").children().hide();
-        //             $("." + target_id_prefix + "Menu").slideToggle();
-        //         };
-        //     };
-        //     // } else if($(e.target).attr("class").includes("Opt")) {
-
-        //     // };
-        // });
-
     };
 });
