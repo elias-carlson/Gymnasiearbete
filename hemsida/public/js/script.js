@@ -31,12 +31,19 @@ $(function () {
         //     return 'Are you sure you want to leave?';
         // });
 
+        var x = 1, dmOptions = [];
+        $(".dmMenu").children().each(function () {
+            dmOptions.push("." + $("#dmOpt"+x).html().toLowerCase());
+            x++;
+        });
+
         var i = 1;
         $(".dmMenu").children().each(function () {
             $(".dmOptions").append(`
-                <div class="dmOpt`+ i + `">
+                <div class="dmOpt`+ i + `"
                     <hr>
                     <div class="style">
+                        <h1>Style</h1>
                         <div class="opt1">
                             <p>Background</p>
                             <div class="optSettings">
@@ -51,12 +58,86 @@ $(function () {
                                 <button>Apply</button>
                             </div>
                         </div>
+                        <hr>
+                        <div class="opt2">
+                            <p>Text</p>
+                            <div class="optSettings">
+                                <div class="stg1">
+                                    <p>Color:</p>
+                                    <input class="color_picker" type="color">
+                                </div>
+                                <button>Apply</button>
+                            </div>
+                        </div>
                     </div>
                     <hr>
-                    <div class="content"></div>
+                    <div class="content">
+                    <h1>Content</h1>
+                    </div>
+                    <hr>
                 </div>`
             );
             i++;
+        });
+
+        var j = 1;
+        $(".dmMenu").children().each(function () {
+            if (j != 2) {
+                $(`.dmOpt` + j + `  .content`).append(`
+                    <div class="opt1">
+                        <p>Text</p>
+                        <div class="optSettings">
+                        </div>
+                    </div>
+                `);
+                var y1 = 1;
+                $('iframe').contents().find(dmOptions[j-1]).find("h1, h2, h3, h4, h5, p").each(function () {
+                    if ($(this)[0].tagName == "P") {
+                        $(`.dmOpt` + j + `  .content .opt1 .optSettings`).append(`
+                            <div class="stg` + y1 + `">
+                                <p>Paragraph:</p>
+                                <textarea>` + $(this).html() + `</textarea>
+                            </div>
+                        `);
+                    } else if ($(this)[0].tagName == "H1") {
+                        $(`.dmOpt` + j + `  .content .opt1 .optSettings`).append(`
+                            <div class="stg` + y1 + `">
+                                <p>Title:</p>
+                                <textarea>` + $(this).html() + `</textarea>
+                            </div>
+                        `);
+                    } else {
+                        $(`.dmOpt` + j + `  .content .opt1 .optSettings`).append(`
+                            <div class="stg` + y1 + `">
+                                <p>Subtitle:</p>
+                                <textarea>` + $(this).html() + `</textarea>
+                            </div>
+                        `);
+                    };
+                    y1++;
+                });
+                $(`.dmOpt` + j + `  .content`).append(`
+                    <div class="opt2">
+                        <p>Links</p>
+                        <div class="optSettings">
+                        </div>
+                    </div>
+                `);
+                var y2 = 1;
+                $('iframe').contents().find(dmOptions[j-1]).find("a").each(function () {
+                    $(`.dmOpt` + j + `  .content .opt2 .optSettings`).append(`<div class="stg` + y2 + `">`);
+                    $(`.dmOpt` + j + `  .content .opt2 .optSettings .stg` + y2 + ``).append(`
+                        <p>To:</p>
+                        <textarea>` + $(this).attr("href") + `</textarea>
+                    `);
+                    $(`.dmOpt` + j + `  .content .opt2 .optSettings .stg` + y2 + ``).append(`
+                        <p>Shows:</p>
+                        <textarea>` + $(this).html() + `</textarea>
+                    `);
+                    y2++;
+                });
+            };
+            j++;
         });
 
         $(window).scroll(function () {
@@ -71,27 +152,24 @@ $(function () {
             $("html").animate({ scrollTop: '100px' });
         });
 
-        //!
         $(".dmOptions").children().hide();
         $(".dmMenu").children().hide();
         $(".bgOptions").children().hide();
         $(".bgMenu").children().hide();
-        $(".dmOptions").find(".test").show();
 
         $(".dmBtn").click(function () {
             $(".dmMenu").children().slideToggle();
         });
-        var opt_id, opt_id_suffix, activeArea, activeOpt, activeStg
+        var dmOpt_id, activeArea, activeStg
         $(".dmMenu").children().click(function () {
-            opt_id = $(this).attr("id");
-            opt_id_suffix = opt_id.substring(5, 6);
+            dmOpt_id = "." + $(this).attr("id");
             if (!$(this).hasClass("selected")) {
-                activeArea = $(this).html().toLowerCase();
+                activeArea = "." + $(this).html().toLowerCase();
                 activeArea = activeArea.replace(/ /g, '_');
                 $(".dmMenu").find(".selected").toggleClass("selected");
                 $(this).toggleClass("selected");
                 $(".dmOptions").children().hide();
-                $(".dmOptions").find("." + opt_id).show();
+                $(".dmOptions").find(dmOpt_id).show();
                 $(".dmBtn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
                 $(".dmMenu").children().slideToggle();
             } else {
@@ -103,12 +181,20 @@ $(function () {
             };
         });
 
+        var opt_id, activeOpt
         $(".optSettings").find("button").click(function () {
+            opt_id = "." + $(this).parent().parent().attr("class");
             activeOpt = $(this).parent().parent().find("p").html().toLowerCase();
-            $('iframe').contents().find("." + activeArea).css(activeOpt, $(".dmOpt" + opt_id_suffix).find(".stg1").find("input").val());
-            if ($(".dmOpt" + opt_id_suffix).find(".stg2").find("input").val().includes(".jpg", ".gif", ".png") == true) {
-                $('iframe').contents().find(activeArea).css(activeOpt, `url("` + $(".dmOpt" + opt_id_suffix).find(".stg2").find("input").val() + `") no-repeat center`);
-                $('iframe').contents().find('header').css("background-size", "cover");
+            if (activeOpt == "background") {
+                $('iframe').contents().find(activeArea).css(activeOpt, $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
+                if ($(dmOpt_id).find(opt_id).find(".stg2").find("input").val() != "") {
+                    $('iframe').contents().find(activeArea).css(activeOpt, `url("` + $(dmOpt_id).find(opt_id).find(".stg2").find("input").val() + `") no-repeat center`);
+                    $('iframe').contents().find(activeArea).css("background-size", "cover");
+                };
+            } else if (activeOpt == "text") {
+                $('iframe').contents().find(activeArea).css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
+                $('iframe').contents().find(activeArea).children().css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
+                $('iframe').contents().find(activeArea).children().children().css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
             };
         });
 
@@ -130,7 +216,7 @@ $(function () {
         //     };
         //     $(".bgMenu").children().click(function () {
         //         var bg_id = $(this).attr("id");
-        //         var bg_id_suffix = bg_id.substring(2, 6);
+        //         var bg_id = bg_id.substring(2, 6);
         //         if (!$(this).hasClass("selected")) {
         //             $(".bgMenu").find(".selected").toggleClass("selected");
         //             $(this).toggleClass("selected");
