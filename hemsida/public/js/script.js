@@ -68,9 +68,6 @@ $(function () {
                             </div>
                         </div>
                     </div>
-                    <div class="content">
-                    <h1>Content</h1>
-                    </div>
                 </div>`
             );
             i++;
@@ -79,10 +76,13 @@ $(function () {
         var j = 1;
         $(".dmMenu").children().each(function () {
             if (j != 2) {
-                $(`.dmOpt` + j + `  .content`).append(`
-                    <div class="opt1">
-                        <p>Text</p>
-                        <div class="optSettings">
+                $(`.dmOpt` + j + ``).append(`
+                    <div class="content">
+                        <h1>Content</h1>
+                        <div class="opt1">
+                            <p>Text</p>
+                            <div class="optSettings">
+                            </div>
                         </div>
                     </div>
                 `);
