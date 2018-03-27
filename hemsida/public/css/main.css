@@ -224,11 +224,26 @@ main {
 
 .control_panel {
     max-width: 25vw;
+    width: auto;
+}
+
+/* 
+.control_panel .dmOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+} */
+
+.control_panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .control_panel .dmOptions div  {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: 80%;
 }
 
 .control_panel .dmOptions div div  {
@@ -237,12 +252,12 @@ main {
 }
 
 .control_panel .dmOptions:nth-Child(n) .style, .control_panel .dmOptions:nth-Child(n) .content {
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
 .control_panel .dmOptions:nth-Child(n) .content {
-    display: none;
+    display: flex;
     flex-direction: column;
 }
 
