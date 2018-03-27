@@ -112,16 +112,17 @@ $(function () {
                     };
                     y1++;
                 });
-                $(`.dmOpt` + j + `  .content`).append(`
-                    <div class="opt2">
-                        <p>Links</p>
-                        <div class="optSettings">
+                if ($('iframe').contents().find(dmOptions[j-1]).find("a").length != 0) {
+                    $(`.dmOpt` + j + `  .content`).append(`
+                        <div class="opt2">
+                            <p>Links</p>
+                            <div class="optSettings">
+                            </div>
                         </div>
-                    </div>
-                `);
+                    `);
+                };
                 var y2 = 1;
                 $('iframe').contents().find(dmOptions[j-1]).find("a").each(function () {
-                    console.log(j);
                     $(`.dmOpt` + j + `  .content .opt2 .optSettings`).append(`<div class="stg` + y2 + `">`);
                     $(`.dmOpt` + j + `  .content .opt2 .optSettings .stg` + y2 + ``).append(`
                         <p>To:</p>
