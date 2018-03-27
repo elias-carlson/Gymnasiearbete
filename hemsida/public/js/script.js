@@ -40,7 +40,7 @@ $(function () {
         var i = 1;
         $(".dmMenu").children().each(function () {
             $(".dmOptions").append(`
-                <div class="dmOpt`+ i + `"
+                <div class="dmOpt`+ i + `">
                     <div class="style">
                         <h1>Style</h1>
                         <div class="opt1">
