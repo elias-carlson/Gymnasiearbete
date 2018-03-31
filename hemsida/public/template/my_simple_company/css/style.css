@@ -71,24 +71,6 @@ blockquote {
     background: white;
 }
 
-ul {
-    margin: 2px 0 22px 17px;
-}
-
-ul li {
-    list-style-type: circle;
-    margin-bottom: 6px;
-    padding: 0 0 4px 5px;
-}
-
-ol {
-    margin: 8px 0 22px 20px;
-}
-
-ol li {
-    margin-bottom: 11px;
-}
-
 main,
 .footer {
     margin-left: auto;
@@ -177,38 +159,10 @@ main {
     padding: 0 15px 20px 15px;
 }
 
-.aside ul {
-    width: 178px;
-    padding: 4px 0 0 0;
-    margin: 4px 0 30px 0;
-}
-
-.aside li {
-    list-style: none;
-    padding: 0 0 7px 0;
-}
-
-.aside li a,
-.aside li a:hover {
-    padding-left: 40px;
-    display: block;
-}
-
 #content {
     text-align: left;
     width: 595px;
     padding: 0;
-}
-
-#content section ul {
-    margin: 2px 0 22px 0px;
-}
-
-#content section ul li {
-    list-style-type: none;
-    margin: 0 0 6px 0;
-    padding: 0 0 4px 25px;
-    line-height: 1.5em;
 }
 
 .footer {
@@ -231,25 +185,4 @@ main {
 .footer p a:hover {
     color: white;
     text-decoration: underline;
-}
-
-table {
-    margin: 10px 0 30px 0;
-    width: 100%;
-    border-spacing: 0;
-}
-
-table tr th {
-    background: black;
-    color: white;
-    padding: 7px 4px;
-    text-align: left;
-}
-
-table tr td {
-    background: gray;
-    color: white;
-    border-top: 1px solid white;
-    padding: 7px 4px;
-    text-align: left;
 }

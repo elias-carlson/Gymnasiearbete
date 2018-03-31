@@ -33,7 +33,7 @@ $(function () {
 
         var x = 1, dmOptions = [];
         $(".dmMenu").children().each(function () {
-            dmOptions.push("." + $("#dmOpt"+x).html().toLowerCase());
+            dmOptions.push("." + $("#dmOpt"+x).html().replace(/\s+/g, '_').toLowerCase());
             x++;
         });
 
@@ -75,14 +75,16 @@ $(function () {
 
         var j = 1;
         $(".dmMenu").children().each(function () {
-            if (j != 2) {
-                $(`.dmOpt` + j + ``).append(`
+            $(`.dmOpt` + j + ``).append(`
                     <div class="content">
                         <h1>Content</h1>
-                        <div class="opt1">
-                            <p>Text</p>
-                            <div class="optSettings">
-                            </div>
+                    </div>
+                `);
+            if (j != 2) {
+                $(`.dmOpt` + j + ` .content`).append(`
+                    <div class="opt1">
+                        <p>Text</p>
+                        <div class="optSettings">
                         </div>
                     </div>
                 `);
@@ -123,18 +125,58 @@ $(function () {
                 };
                 var y2 = 1;
                 $('iframe').contents().find(dmOptions[j-1]).find("a").each(function () {
-                    $(`.dmOpt` + j + `  .content .opt2 .optSettings`).append(`<div class="stg` + y2 + `">`);
-                    $(`.dmOpt` + j + `  .content .opt2 .optSettings .stg` + y2 + ``).append(`
-                        <p>To:</p>
-                        <textarea>` + $(this).attr("href") + `</textarea>
-                    `);
-                    $(`.dmOpt` + j + `  .content .opt2 .optSettings .stg` + y2 + ``).append(`
-                        <p>Shows:</p>
-                        <textarea>` + $(this).html() + `</textarea>
+                    $(`.dmOpt` + j + `  .content .opt2 .optSettings`).append(`
+                        <div class="stg` + y2 + `">
+                            <p>To:</p>
+                            <textarea>` + $(this).attr("href") + `</textarea>
+                            <p>Shows:</p>
+                            <textarea>` + $(this).html() + `</textarea>
+                        </div>
                     `);
                     y2++;
                 });
+                if ($('iframe').contents().find(dmOptions[j-1]).find("img").length != 0) {
+                    $(`.dmOpt` + j + `  .content`).append(`
+                        <div class="opt3">
+                            <p>Images</p>
+                            <div class="optSettings">
+                            </div>
+                        </div>
+                    `);
+                };
+                var y3 = 1;
+                $('iframe').contents().find(dmOptions[j-1]).find("img").each(function () {
+                    $(`.dmOpt` + j + `  .content .opt3 .optSettings`).append(`
+                        <div class="stg` + y3 + `">
+                            <div class="imgPreview"></div>
+                            <input type="text" value="` + $(this).attr("src") + `">
+                        </div>`);
+                    $(`.dmOpt` + j + `  .content .opt3 .optSettings .stg` + y3 + ` .imgPreview`).css("background", `url("` + $(this).attr("src") + `") no-repeat center`);
+                    $(`.dmOpt` + j + `  .content .opt3 .optSettings .stg` + y3 + ` .imgPreview`).css("background-size", "cover");
+                    y3++;
+                });
+            } else {
+                $(`.dmOpt` + j + `  .content`).append(`
+                        <div class="opt4">
+                            <p>Tabs</p>
+                            <div class="optSettings">
+                            </div>
+                        </div>
+                    `);
+                var y4 = 1;
+                $('iframe').contents().find(dmOptions[j-1]).find("li").each(function () {
+                    $(`.dmOpt` + j + `  .content .opt4 .optSettings`).append(`
+                        <div class="stg` + y4 + `">
+                            <p>Tab ` + y4 + `:</p>
+                            <input type="text" value="` + $(this).html() + `">
+                        </div>
+                    `);
+                });
             };
+            $(`.dmOpt` + j + ` .content`).append(`<button>Apply</button>`);
+            $(`.dmOpt` + j + ` .content button`).click(function(){
+                alert("Hello");
+            });
             j++;
         });
 
