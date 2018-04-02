@@ -41,11 +41,29 @@ header {
     top: 0;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.75);
     display: none;
+    flex-direction: column;
+    padding: 100px 0 0 0;
+}
+
+.sidenav a[href="/register"] {
+    color: #FF9800;
+    font-weight: bolder;
 }
 
 #sidenavLink {
-    margin: 100px 0 0 50px;
+    font-weight: bold;
+    margin: 20px;
     font-size: 21px;
+    border-top: 2px rgba(0,0,0,0.5) solid;
+    border-left: 2px rgba(0,0,0,0.5) solid;
+    padding: 5px 0 0 5px;
+}
+
+#sidenavLink:hover {
+    color: white;
+    border-top: 2px white solid;
+    border-left: 2px white solid;
+    transition: all 0.25s;
 }
 
 .menubtn {
@@ -146,6 +164,7 @@ main {
     grid-gap: 50px;
     margin: 50px;
     width: 80%;
+    height: 50%;
     padding: 50px;
     border-radius: 2px;
     color: #212121;
@@ -218,18 +237,26 @@ main {
 .control_panel {
     max-width: 25vw;
     width: auto;
-}
-
-.control_panel {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
+}
+
+.control_panel .dmOptions {
+    
 }
 
 .control_panel .dmOptions div  {
-    display: flex;
+    display: block;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
+}
+
+.control_panel .dmOptions button {
+    width: 20%;
+    margin: 10px 0 10px 0;
+    min-height: 20px;
 }
 
 .control_panel .dmOptions div div  {
@@ -238,7 +265,7 @@ main {
 }
 
 .control_panel .dmOptions:nth-Child(n) .style, .control_panel .dmOptions:nth-Child(n) .content {
-    display: none;
+    /* display: none; */
     flex-direction: column;
 }
 
@@ -262,15 +289,16 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 30px auto 0 auto;
+    margin: 20px 0 0 0;
     height: 50px;
-    width: 80%;
+    min-height: 50px;
+    width: calc(100% - 40px);
     background: #757575;
     color: white;
 }
 
 .dmMenu {
-    width: 80%;
+    width: calc(100% - 40px);
     margin: 0 auto;
     background: white;
 }
@@ -294,6 +322,22 @@ main {
 
 .dmMenu p:hover, .dmBtn:hover, .bgBtn:hover, .bgMenu {
     cursor: pointer;
+}
+
+.dmOptions {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dmOptions div h1 {
+    text-align: center;
+}
+
+.content textarea {
+    font-family: 'Raleway', sans-serif;
+    min-height: 50px;
 }
 
 iframe {
@@ -357,4 +401,3 @@ footer {
 .register_main a:hover { 
     color: #FF9800;
 }
-

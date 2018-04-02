@@ -15,8 +15,13 @@ class App < Sinatra::Base
 	end
 
 	get '/app' do
-		website = get_html("my_simple_company")
-		slim(:app, locals:{user: session[:user], error: flash[:error], username_or_email: flash[:username_or_email], website: website})
+		if session[:user] == nil 
+			flash[:error] = "You need to log in to access this page."
+			redirect('/')
+		else
+			website = get_html("my_simple_company")
+			slim(:app, locals:{user: session[:user], error: flash[:error], username_or_email: flash[:username_or_email], website: website})
+		end
 	end
 
 	post('/register') do
@@ -106,6 +111,7 @@ class App < Sinatra::Base
 
 	post('/logout') do
 		session[:user] = nil
+		flash[:error] = nil
 		redirect(back)
 	end
 end

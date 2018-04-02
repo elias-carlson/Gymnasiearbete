@@ -4,9 +4,13 @@ $(function () {
         $(".sidenav").css('display', 'flex');
     });
 
-    $("main,footer").click(function () {
-        $(".sidenav").animate({ width: '0' }, 500);
-        $(".sidenav").css('display', 'none');        
+    $("html").not(".sidenav > *").click(function () {
+        if($(".sidenav").css('width') != '0px') {
+            $(".sidenav").animate({ width: '0' }, 500);
+            setTimeout(function() {
+                $(".sidenav").css('display', 'none');
+            }, 500); 
+        };
     });
 
     $(".login p").click(function () {
@@ -44,7 +48,7 @@ $(function () {
                     <div class="style">
                         <h1>Style</h1>
                         <div class="opt1">
-                            <p>Background</p>
+                            <h2>Background</h2>
                             <div class="optSettings">
                                 <div class="stg1">
                                     <p>Color:</p>
@@ -58,7 +62,7 @@ $(function () {
                             </div>
                         </div>
                         <div class="opt2">
-                            <p>Text</p>
+                            <h2>Text</h2>
                             <div class="optSettings">
                                 <div class="stg1">
                                     <p>Color:</p>
@@ -117,7 +121,7 @@ $(function () {
         var opt_id, activeOpt
         $(".optSettings").find("button").click(function () {
             opt_id = "." + $(this).parent().parent().attr("class");
-            activeOpt = $(this).parent().parent().find("p").html().toLowerCase();
+            activeOpt = $(this).parent().parent().find("h2").html().toLowerCase();
             if (activeOpt == "background") {
                 $('iframe').contents().find(activeArea).css(activeOpt, $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
                 if ($(dmOpt_id).find(opt_id).find(".stg2").find("input").val() != "") {
@@ -141,7 +145,7 @@ $(function () {
             if (j != 2) {
                 $(`.dmOpt` + j + ` .content`).append(`
                     <div class="opt1">
-                        <p>Text</p>
+                        <h2>Text</h2>
                         <div class="optSettings">
                         </div>
                     </div>
@@ -175,7 +179,7 @@ $(function () {
                 if ($('iframe').contents().find(dmOptions[j-1]).find("a").length != 0) {
                     $(`.dmOpt` + j + `  .content`).append(`
                         <div class="opt2">
-                            <p>Links</p>
+                            <h2>Links</h2>
                             <div class="optSettings">
                             </div>
                         </div>
@@ -196,7 +200,7 @@ $(function () {
                 if ($('iframe').contents().find(dmOptions[j-1]).find("img").length != 0) {
                     $(`.dmOpt` + j + `  .content`).append(`
                         <div class="opt3">
-                            <p>Images</p>
+                            <h2>Images</h2>
                             <div class="optSettings">
                             </div>
                         </div>
@@ -216,7 +220,7 @@ $(function () {
             } else {
                 $(`.dmOpt` + j + `  .content`).append(`
                         <div class="opt4">
-                            <p>Tabs</p>
+                            <h2>Tabs</h2>
                             <div class="optSettings">
                             </div>
                         </div>
