@@ -73,6 +73,64 @@ $(function () {
             i++;
         });
 
+        $(window).scroll(function () {
+            if ($(this).scrollTop() < 100 || $(this).scrollTop() > 100) {
+                $("#toTopBtn").fadeIn();
+            } else {
+                $("#toTopBtn").fadeOut();
+            }
+        });
+
+        $("#toTopBtn").click(function (e) {
+            $("html").animate({ scrollTop: '100px' });
+        });
+
+        $(".dmOptions").children().hide();
+        $(".dmMenu").children().hide();
+        $(".bgOptions").children().hide();
+        $(".bgMenu").children().hide();
+
+        $(".dmBtn").click(function () {
+            $(".dmMenu").children().slideToggle();
+        });
+        var dmOpt_id, activeArea, activeStg
+        $(".dmMenu").children().click(function () {
+            dmOpt_id = "." + $(this).attr("id");
+            if (!$(this).hasClass("selected")) {
+                activeArea = "." + $(this).html().toLowerCase();
+                activeArea = activeArea.replace(/ /g, '_');
+                $(".dmMenu").find(".selected").toggleClass("selected");
+                $(this).toggleClass("selected");
+                $(".dmOptions").children().hide();
+                $(".dmOptions").find(dmOpt_id).show();
+                $(".dmBtn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
+                $(".dmMenu").children().slideToggle();
+            } else {
+                activeArea = "";
+                $(".dmBtn").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
+                $(this).toggleClass("selected");
+                $(".dmOptions").children().hide();
+                $(".dmMenu").children().slideToggle();
+            };
+        });
+
+        var opt_id, activeOpt
+        $(".optSettings").find("button").click(function () {
+            opt_id = "." + $(this).parent().parent().attr("class");
+            activeOpt = $(this).parent().parent().find("p").html().toLowerCase();
+            if (activeOpt == "background") {
+                $('iframe').contents().find(activeArea).css(activeOpt, $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
+                if ($(dmOpt_id).find(opt_id).find(".stg2").find("input").val() != "") {
+                    $('iframe').contents().find(activeArea).css(activeOpt, `url("` + $(dmOpt_id).find(opt_id).find(".stg2").find("input").val() + `") no-repeat center`);
+                    $('iframe').contents().find(activeArea).css("background-size", "cover");
+                };
+            } else if (activeOpt == "text") {
+                $('iframe').contents().find(activeArea).css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
+                $('iframe').contents().find(activeArea).children().css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
+                $('iframe').contents().find(activeArea).children().children().css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
+            };
+        });
+        
         var j = 1;
         $(".dmMenu").children().each(function () {
             $(`.dmOpt` + j + ``).append(`
@@ -171,6 +229,7 @@ $(function () {
                             <input type="text" value="` + $(this).html() + `">
                         </div>
                     `);
+                    y4++;
                 });
             };
             $(`.dmOpt` + j + ` .content`).append(`<button>Apply</button>`);
@@ -178,64 +237,6 @@ $(function () {
                 alert("Hello");
             });
             j++;
-        });
-
-        $(window).scroll(function () {
-            if ($(this).scrollTop() < 100 || $(this).scrollTop() > 100) {
-                $("#toTopBtn").fadeIn();
-            } else {
-                $("#toTopBtn").fadeOut();
-            }
-        });
-
-        $("#toTopBtn").click(function (e) {
-            $("html").animate({ scrollTop: '100px' });
-        });
-
-        $(".dmOptions").children().hide();
-        $(".dmMenu").children().hide();
-        $(".bgOptions").children().hide();
-        $(".bgMenu").children().hide();
-
-        $(".dmBtn").click(function () {
-            $(".dmMenu").children().slideToggle();
-        });
-        var dmOpt_id, activeArea, activeStg
-        $(".dmMenu").children().click(function () {
-            dmOpt_id = "." + $(this).attr("id");
-            if (!$(this).hasClass("selected")) {
-                activeArea = "." + $(this).html().toLowerCase();
-                activeArea = activeArea.replace(/ /g, '_');
-                $(".dmMenu").find(".selected").toggleClass("selected");
-                $(this).toggleClass("selected");
-                $(".dmOptions").children().hide();
-                $(".dmOptions").find(dmOpt_id).show();
-                $(".dmBtn").html(`Area: ` + $(this).html() + `<i class="material-icons"> arrow_drop_down</i>`);
-                $(".dmMenu").children().slideToggle();
-            } else {
-                activeArea = "";
-                $(".dmBtn").html(`Select area <i class="material-icons"> arrow_drop_down</i>`);
-                $(this).toggleClass("selected");
-                $(".dmOptions").children().hide();
-                $(".dmMenu").children().slideToggle();
-            };
-        });
-
-        var opt_id, activeOpt
-        $(".optSettings").find("button").click(function () {
-            opt_id = "." + $(this).parent().parent().attr("class");
-            activeOpt = $(this).parent().parent().find("p").html().toLowerCase();
-            if (activeOpt == "background") {
-                $('iframe').contents().find(activeArea).css(activeOpt, $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
-                if ($(dmOpt_id).find(opt_id).find(".stg2").find("input").val() != "") {
-                    $('iframe').contents().find(activeArea).css(activeOpt, `url("` + $(dmOpt_id).find(opt_id).find(".stg2").find("input").val() + `") no-repeat center`);
-                    $('iframe').contents().find(activeArea).css("background-size", "cover");
-                };
-            } else if (activeOpt == "text") {
-                $('iframe').contents().find(activeArea).css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
-                $('iframe').contents().find(activeArea).children().css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
-                $('iframe').contents().find(activeArea).children().children().css("color", $(dmOpt_id).find(opt_id).find(".stg1").find("input").val());
-            };
         });
     };
 });
