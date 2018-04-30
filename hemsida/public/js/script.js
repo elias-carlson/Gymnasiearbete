@@ -31,9 +31,9 @@ $(function () {
 
     if (top.location.pathname == "/app") {
 
-        // $(window).on('beforeunload', function(){
-        //     return 'Are you sure you want to leave?';
-        // });
+        $(window).on('beforeunload', function(){
+            return 'Are you sure you want to leave?';
+        });
 
         var x = 1, dmOptions = [];
         $(".dmMenu").children().each(function () {
@@ -190,7 +190,7 @@ $(function () {
                     $(`.dmOpt` + j + `  .content .opt2 .optSettings`).append(`
                         <div class="stg` + y2 + `">
                             <p>To:</p>
-                            <textarea>` + $(this).attr("href") + `</textarea>
+                            <input type="text" value="` + $(this).attr("href") + `"></input>
                             <p>Shows:</p>
                             <textarea>` + $(this).html() + `</textarea>
                         </div>
@@ -210,11 +210,10 @@ $(function () {
                 $('iframe').contents().find(dmOptions[j-1]).find("img").each(function () {
                     $(`.dmOpt` + j + `  .content .opt3 .optSettings`).append(`
                         <div class="stg` + y3 + `">
-                            <div class="imgPreview"></div>
+                            <img class="imgPreview">
                             <input type="text" value="` + $(this).attr("src") + `">
                         </div>`);
-                    $(`.dmOpt` + j + `  .content .opt3 .optSettings .stg` + y3 + ` .imgPreview`).css("background", `url("` + $(this).attr("src") + `") no-repeat center`);
-                    $(`.dmOpt` + j + `  .content .opt3 .optSettings .stg` + y3 + ` .imgPreview`).css("background-size", "cover");
+                    $(`.dmOpt` + j + `  .content .opt3 .optSettings .stg` + y3 + ` img.imgPreview`).attr("src", $(this).attr("src"));
                     y3++;
                 });
             } else {
@@ -236,11 +235,32 @@ $(function () {
                     y4++;
                 });
             };
-            $(`.dmOpt` + j + ` .content`).append(`<button>Apply</button>`);
+            $(`.dmOpt` + j + ` .content`).append(`<button id="` + j + `">Apply</button>`);
             $(`.dmOpt` + j + ` .content button`).click(function(){
-                alert("Hello");
+                var z = $(this).attr("id"), i = 0;
+                $(`.dmOpt` + z + ` .content .opt1 .optSettings div`).each(function(){
+                    $($('iframe').contents().find(dmOptions[z-1]).find("h1, h2, h3, h4, h5, p")[i]).html($(`.dmOpt` + z + ` .content .opt1 .optSettings .` +  $(this).attr("class") + ` textarea`).val());
+                    i++;
+                });
+                $(`.dmOpt` + z + ` .content .opt2 .optSettings div`).each(function(){
+                    $('iframe').contents().find(dmOptions[z-1]).find("a").html($(`.dmOpt` + z + ` .content .opt2 .optSettings .` +  $(this).attr("class") + ` textarea`).val());
+                    $('iframe').contents().find(dmOptions[z-1]).find("a").attr("href", $(`.dmOpt` + z + ` .content .opt2 .optSettings .` +  $(this).attr("class") + ` input`).val());
+                });
+                i = 0;
+                $(`.dmOpt` + z + ` .content .opt3 .optSettings div`).each(function(){
+                    $($('iframe').contents().find(dmOptions[z-1]).find("img")[i]).attr("src", $(`.dmOpt` + z + ` .content .opt3 .optSettings .` +  $(this).attr("class") + ` input`).val());
+                    i++;
+                });
+                i = 0;
+                $(`.dmOpt` + z + ` .content .opt4 .optSettings div`).each(function(){
+                    $($('iframe').contents().find(dmOptions[z-1]).find("li")[i]).html($(`.dmOpt` + z + ` .content .opt4 .optSettings .` +  $(this).attr("class") + ` input`).val());
+                    i++;
+                });
             });
             j++;
+        });
+        $(`.content .opt3 .optSettings div input`).keyup(function(){
+            $(`.`+ $(this).parent().attr("class") + ` .imgPreview`).attr("src", $(this).val());
         });
     };
 });

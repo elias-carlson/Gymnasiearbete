@@ -243,10 +243,6 @@ main {
     overflow-y: scroll;
 }
 
-.control_panel .dmOptions {
-    
-}
-
 .control_panel .dmOptions div  {
     display: block;
     flex-direction: column;
@@ -264,19 +260,12 @@ main {
     flex-direction: column;
 }
 
-.control_panel .dmOptions:nth-Child(n) .style, .control_panel .dmOptions:nth-Child(n) .content {
-    /* display: none; */
+/* .control_panel .dmOptions:nth-Child(n) .style, .control_panel .dmOptions:nth-Child(n) .content {
+    display: none;
     flex-direction: column;
-}
+} */
 
-.control_panel .dmOptions:nth-Child(n) .content {
-    display: flex;
-    flex-direction: column;
-}
-
-/* jag ville bara se om det se rätt ut ändra det så att det passar bra. ps: ta bort kommentaren */
 .control_panel .dmOptions:nth-Child(n) .content .opt3 .optSettings:nth-child(n) .imgPreview {
-    background-size: cover;
     width: 100px;
     height: 100px;
 }
