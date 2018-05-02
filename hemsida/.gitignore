@@ -1,3 +1,4 @@
 .vagrant/**
 Vagrantfile
 Gemfile.lock
+db/database.sqlite
